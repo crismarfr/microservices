@@ -58,7 +58,6 @@ public class DemoApplication1{
 			return mess;
 	}
 	 
-		 
 	@PreAuthorize("#oauth2.hasScope('microservice2')")
 	@RequestMapping(value="/callMicroservice2", method=RequestMethod.GET)
 	
@@ -66,8 +65,8 @@ public class DemoApplication1{
 			
 		Message mess=new Message();
 		mess.setMess(callMicroservice().getMess() +" --- "+ appelClient.getMessage().getMess());
-		
-		log.info(mess.getMess());
+				
+//		log.info(mess.getMess());
 		return mess;
 	}
 	 

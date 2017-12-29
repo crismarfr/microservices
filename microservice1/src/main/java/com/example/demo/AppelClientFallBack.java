@@ -13,7 +13,7 @@ public class AppelClientFallBack implements AppelClient {
 	public Message getMessage()
 	{
 		Message mess=new Message();
-		mess.setMess("DOWN");
+		mess.setMess("Status DOWN microservice2 !");
 		return mess;
 	}
 }
