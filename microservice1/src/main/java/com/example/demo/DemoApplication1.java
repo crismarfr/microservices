@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
@@ -7,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
-import org.springframework.cloud.netflix.feign.FeignAutoConfiguration;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -33,9 +34,9 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 @EnableResourceServer
 @EnableOAuth2Client
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-
 public class DemoApplication1{
 	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	static AppelClient appelClient;
 	
 	@PreAuthorize("#oauth2.hasScope('microservice1')")
@@ -44,12 +45,16 @@ public class DemoApplication1{
 	public Message callMicroservice(){
 		Message mess=new Message();
 		mess.setMess("Status OK microservice1 !");
+		
+		log.info(mess.getMess());
 		return mess;
 	}
 	
 	 private Message defaultCallMicroservice() {
 		 Message mess=new Message();
 			mess.setMess("Mode dégradé : Status microservice1 OK !");
+			
+			log.info(mess.getMess());
 			return mess;
 	}
 	 
@@ -61,6 +66,8 @@ public class DemoApplication1{
 			
 		Message mess=new Message();
 		mess.setMess(callMicroservice().getMess() +" --- "+ appelClient.getMessage().getMess());
+		
+		log.info(mess.getMess());
 		return mess;
 	}
 	 
