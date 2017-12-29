@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 
@@ -28,18 +30,24 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 @EnableOAuth2Client
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class DemoApplication3{
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	@PreAuthorize("#oauth2.hasScope('microservice3')")
 	@RequestMapping(value="/callMicroservice", method=RequestMethod.GET)
 	@HystrixCommand(fallbackMethod = "defaultCallMicroservice")
 	public Message callMicroservice(){
 		Message mess=new Message();
 		mess.setMess("Status OK microservice3 !");
+		
+		log.info(mess.getMess());
 		return mess;
 	}
 	
 	 private Message defaultCallMicroservice() {
 		 Message mess=new Message();
 			mess.setMess("Mode dégradé : Status OK microservice3 !");
+			
+			log.info(mess.getMess());
 			return mess;
 	}
 	
