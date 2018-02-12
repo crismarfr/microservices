@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>POC Portail AROM : WebApp</title>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+      
+    <script src="appPortal.js"></script>        
+</head>
+<body ng-app="myapp">
+  <div ng-controller="MyController as ctrl">
+
+<H1>POC Portail AROM : SIMM</H1>
+
+id conseiller : <input type="text" ng-model="ctrl.idConseiller"></input>
+id client : <input type="text" ng-model="ctrl.idClient"></input>
+<BR/>
+
+<div style="visibility: hidden">
+use spring 4 <input type="radio" ng-model="ctrl.useImpl" value="spring4" />
+ / 5 <input type="radio" ng-model="ctrl.useImpl" value="spring5"/>
+ </BR>
+ </div>
+ 
+<button ng-click="ctrl.onClickSendEventOpen()">Ouverture WebApp</button>&nbsp;&nbsp;
+<button ng-click="ctrl.onClickSendEventClose()">Fermeture WebApp</button>
+
+<div style="visibility: hidden">
+connection status:{{ctrl.connStatus}} lastEventId: {{ctrl.lastEventId}}
+<BR/><BR/>
+	
+events : <textarea cols="40" rows="20" ng-model="ctrl.formattedEvents"></textarea>
+
+<BR/><BR/>
+event: <input type="text" ng-model="ctrl.eventToSend"></input>
+<button ng-click="ctrl.onClickSendEvent()">Envoi</button>
+</div>
+
+  </div>
+</body>
+</html>
+

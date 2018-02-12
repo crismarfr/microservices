@@ -1,0 +1,293 @@
+<html>
+
+   <head>
+      <title>Angular JS Services</title>
+      <script src = "./lib/angular.min.js"></script>
+      <script src = "./lib/angular-local-storage.min.js"></script>
+	  <script src = "./lib/jquery-1.10.2.js"></script>
+	  <meta http-equiv="content-type" content="test/html; charset=utf-8" />
+   </head>
+   
+   <body>
+      <h2>AngularJS Sample Application ATOM Architecture</h2>
+      
+      <div ng-app = "mainApp" ng-controller = "AuthController">
+		<p>Scope(s) : <input type="text" ng-model="token" size="100" ></p>
+		 <button ng-click = "auth()">Get token from SSO</button>
+		 <button ng-click = "authCache()">Get token from cache</button>
+		 <button ng-click = "deleteAuthCache()">Delete token from cache</button>
+	     <button ng-click = "authRefresh()">Get refresh token from SSO</button>
+         <button ng-click = "authMic()">Appel du microservice1</button>
+		 <button ng-click = "authMic1()">Appel du microservice2</button>
+		 <button ng-click = "authMic2()">Appel du microservice3</button>
+		 <button ng-click = "authMic3()">Appel du microservice4</button>
+		 <br>
+		 <button ng-click = "authMic4()">Appel du microservice1 -> microservice2</button>
+		 </br>
+         <p>Result: {{result}}</p>
+      </div>
+      
+      <script>
+        var mainApp = angular.module("mainApp", ['LocalStorageModule']);
+         
+	mainApp.factory("Auth1Service", function ($q,localStorageService, $http, $rootScope) {
+	var service = {};
+	service.authenticate = function ($scope) {
+		$http({
+			url: 'http://localhost:8080/uaa/oauth/token',
+			method: "post",
+			data: $.param({
+			grant_type: 'password',
+			client_id: 'acme',
+			client_secret: 'secret',
+			redirect_url: '',
+			username: 'root',
+			password: 'password',
+			scope: $scope.token
+			}),
+			headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Access-Control-Allow-Credentials': 'true',
+			'Authorization': 'Basic ' + btoa('acme' + ':' + 'secret')
+			}
+		})
+		.success(function (data) {
+			console.log("Successful: response from submitting data to server was: ", data);
+			localStorageService.add('authToken', data.access_token);
+			localStorageService.add('refreshAuthToken', data.refresh_token);
+			$http.defaults.headers.common['Authorization'] = 'Basic ' + data.access_token;
+			$scope.result=data;
+		})
+		.error(function (response) {
+			console.log("Failed: response from submitting data to server was: ", response);
+			$scope.result=response;
+		})
+	};
+
+	service.refreshToken = function ($scope) {
+		var refresh_token=localStorageService.get('refreshAuthToken');
+		$http({
+			url: 'http://localhost:8080/uaa/oauth/token',
+			method: "post",
+			data: $.param({
+			grant_type: 'refresh_token',
+			client_id: 'acme',
+			client_secret: 'secret',
+			redirect_url: '',
+			username: 'root',
+			password: 'password',
+			refresh_token: refresh_token
+			}),
+			headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Access-Control-Allow-Credentials': 'true',
+			'Authorization': 'Basic ' + btoa('acme' + ':' + 'secret')
+			}
+		})
+		.success(function (data) {
+			console.log("Successful: response from submitting data to server was: ", data);
+			localStorageService.add('authToken', data.access_token);
+			localStorageService.add('refreshAuthToken', data.refresh_token);
+			$http.defaults.headers.common['Authorization'] = 'Basic ' + data.access_token;
+			$scope.result=data;
+		})
+		.error(function (response) {
+			console.log("Failed: response from submitting data to server was: ", response);
+			$scope.result=response;
+		})	
+	}
+
+	service.useTokenFromCache = function ($scope) {
+	var token=localStorageService.get('authToken');
+	if(token) {
+		console.log("Successful: token in cache : " + token);
+		$http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+		$scope.result=token;
+		return token;
+		}
+	}
+
+	service.deleteTokenFromCache = function ($scope) {
+	localStorageService.remove('authToken');
+	localStorageService.remove('refreshAuthToken');
+	$http.defaults.headers.common['Authorization'] = '';
+	var token=localStorageService.get('authToken');
+	if(!token) {
+		console.log("Successful: delete token cache");
+		}
+	}	
+	
+	service.callMic = function ($scope) {
+		$http({
+			url: 'http://localhost:8080/api1/callMicroservice',
+			method: "get",
+			headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Access-Control-Allow-Credentials': 'true',
+			}
+		})
+		.success(function (data) {
+			console.log("Successful: response from submitting data to server was: ", data);
+			$scope.result=data;
+		})
+		.error(function (response) {
+			console.log("Failed: response from submitting data to server was: ", response);
+			$scope.result=response;
+		});	
+	}
+
+	service.callMic1 = function ($scope) {
+		$http({
+			url: 'http://localhost:8080/api2/callMicroservice',
+			method: "get",
+			headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Access-Control-Allow-Credentials': 'true',
+			}
+		})
+		.success(function (data) {
+			console.log("Successful: response from submitting data to server was: ", data);
+			$scope.result=data;
+		})
+		.error(function (response) {
+			console.log("Failed: response from submitting data to server was: ", response);
+			$scope.result=response;
+		});	
+	}
+	
+	service.callMic2 = function ($scope) {
+		$http({
+			url: 'http://localhost:8080/api3/callMicroservice',
+			method: "get",
+			headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Access-Control-Allow-Credentials': 'true',
+			}
+		})
+		.success(function (data) {
+			console.log("Successful: response from submitting data to server was: ", data);
+			$scope.result=data;
+		})
+		.error(function (response) {
+			console.log("Failed: response from submitting data to server was: ", response);
+			$scope.result=response;
+		});	
+	}
+	
+	service.callMic3 = function ($scope) {
+		$http({
+			url: 'http://localhost:8080/api4/callMicroservice',
+			method: "get",
+			headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Access-Control-Allow-Credentials': 'true',
+			}
+		})
+		.success(function (data) {
+			console.log("Successful: response from submitting data to server was: ", data);
+			$scope.result=data;
+		})
+		.error(function (response) {
+			console.log("Failed: response from submitting data to server was: ", response);
+			$scope.result=response;
+		});	
+	}
+	
+		service.callMic4 = function ($scope) {
+		$http({
+			url: 'http://localhost:8080/api1/callMicroservice2',
+			method: "get",
+			headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Access-Control-Allow-Credentials': 'true',
+			}
+		})
+		.success(function (data) {
+			console.log("Successful: response from submitting data to server was: ", data);
+			$scope.result=data;
+		})
+		.error(function (response) {
+			console.log("Failed: response from submitting data to server was: ", response);
+			$scope.result=response;
+		});	
+	}
+	
+	return service;
+	});
+		          
+	 mainApp.service('AuthService', function(Auth1Service){
+		this.auth = function(a, b, c, d) {
+		   return Auth1Service.authenticate(d);
+		}
+		this.authCache = function(a, b, c, d) {
+		   return Auth1Service.useTokenFromCache(d);
+		}
+		this.deleteAuthCache = function(a, b, c, d) {
+		   return Auth1Service.deleteTokenFromCache(d);
+		}
+		this.authMic = function(a, b, c, d) {
+		   Auth1Service.useTokenFromCache(d);
+		   return Auth1Service.callMic(d);
+		}
+		this.authMic1 = function(a, b, c, d) {
+		   Auth1Service.useTokenFromCache(d);
+		   return Auth1Service.callMic1(d);
+		}
+		this.authMic2 = function(a, b, c, d) {
+		   Auth1Service.useTokenFromCache(d);
+		   return Auth1Service.callMic2(d);
+		}	
+		this.authMic3 = function(a, b, c, d) {
+		   Auth1Service.useTokenFromCache(d);
+		   return Auth1Service.callMic3(d);
+		}	
+		this.authMic4 = function(a, b, c, d) {
+		   Auth1Service.useTokenFromCache(d);
+		   return Auth1Service.callMic4(d);
+		}			
+		this.authRefresh = function(a, b, c, d) {
+		   Auth1Service.useTokenFromCache(d);
+		   return Auth1Service.refreshToken(d);
+		}
+	 });
+	
+	 mainApp.controller('AuthController', function($q,localStorageService, $http, $scope, AuthService) {
+	    $scope.auth = function() {
+            $scope.result = AuthService.auth($q,localStorageService, $http, $scope);
+            }
+	    $scope.authCache = function() {
+            $scope.result = AuthService.authCache($q,localStorageService, $http, $scope);
+            }
+	    $scope.deleteAuthCache = function() {
+            $scope.result = AuthService.deleteAuthCache($q,localStorageService, $http, $scope);
+            }			
+	    $scope.authMic = function() {
+            $scope.result = AuthService.authMic($q,localStorageService, $http, $scope);
+            }
+	    $scope.authMic1 = function() {
+            $scope.result = AuthService.authMic1($q,localStorageService, $http, $scope);
+            }	
+	    $scope.authMic2 = function() {
+            $scope.result = AuthService.authMic2($q,localStorageService, $http, $scope);
+            }	
+	    $scope.authMic3 = function() {
+            $scope.result = AuthService.authMic3($q,localStorageService, $http, $scope);
+            }	
+		$scope.authMic4 = function() {
+            $scope.result = AuthService.authMic4($q,localStorageService, $http, $scope);
+            }			
+	    $scope.authRefresh = function() {
+            $scope.result = AuthService.authRefresh($q,localStorageService, $http, $scope);
+            }
+         });
+      </script>
+      
+   </body>
+</html>
