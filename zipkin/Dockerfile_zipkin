@@ -1,7 +1,7 @@
 FROM java:8-jre
-RUN mkdir -p config && mkdir -p /home/arom/apps/app && mkdir -p /home/arom/apps/logs && mkdir -p /home/arom/apps/configRepo
-RUN chown -R 1001:1001 /home/arom/apps/app /home/arom/apps/logs /home/arom/apps/configRepo
-RUN chmod -R 777 config /home/arom/apps/app /home/arom/apps/logs /home/arom/apps/configRepo
+RUN mkdir -p config && mkdir -p /home/arom/apps/app && mkdir -p /home/arom/apps/logs
+RUN chown -R 1001:1001 /home/arom/apps/app /home/arom/apps/logs
+RUN chmod -R 777 config /home/arom/apps/app /home/arom/apps/logs
 VOLUME /home/arom/apps
 ENV JAR_FILE ./zipkin/target/Zipkin-0.0.1-SNAPSHOT.jar
 ADD $JAR_FILE /home/arom/apps/app/app.jar
