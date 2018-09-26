@@ -1,5 +1,5 @@
-sudo docker run -p 8888:8888 --network my_net -itd -v /home/arom/apps/configRepo:/home/arom/apps/configRepo:z --name configserver configserver --net="ip"
-sleep 30
+sudo docker run -p 8888:8888 --network my_net -itd -v /home/arom/apps/configRepoServer:/home/arom/apps/configRepoServer:z --name configserver configserver --net="ip"
+sleep 35
 sudo docker run -p 8761:8761 -e "SPRING_PROFILES_ACTIVE=eureka1" --network my_net -itd --name registry1 registry1
 sudo docker run -p 8762:8762 -e "SPRING_PROFILES_ACTIVE=eureka2" --network my_net -itd --name registry2 registry2
 sudo docker run -p 8080:8080 --network my_net -itd --name gateway gateway --net="ip"
