@@ -1,8 +1,12 @@
 FROM java:8-jre
 RUN mkdir -p config && mkdir -p /home/arom/apps/app && mkdir -p /home/arom/apps/logs && mkdir -p /home/arom/apps/configRepo
+RUN chown -R 1001:1001 /home/arom/apps/app /home/arom/apps/logs /home/arom/apps/configRepo
+RUN chmod -R 777 config /home/arom/apps/app /home/arom/apps/logs /home/arom/apps/configRepo
 VOLUME /home/arom/apps
-ADD ./zipkin/lib/Zipkin-0.0.1-SNAPSHOT.jar /home/arom/apps/app/app.jar
+ENV JAR_FILE ./target/Zipkin-0.0.1-SNAPSHOT.jar
+ADD $JAR_FILE /home/arom/apps/app/app.jar
 EXPOSE 9095
+USER 1001
 COPY ./zipkin/config/application.properties /config/application.properties
 RUN bash -c 'touch /home/arom/apps/app/app.jar'
 ENTRYPOINT ["java","-jar","/home/arom/apps/app/app.jar"]
