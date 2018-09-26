@@ -1,0 +1,7 @@
+FROM java:8-jre
+RUN mkdir -p /home/arom/apps/app && mkdir -p /home/arom/apps/logs
+VOLUME /home/arom/apps
+ADD ./microservice/lib/microservice1-0.0.1-SNAPSHOT.jar /home/arom/apps/app/app.jar
+EXPOSE 8090
+RUN bash -c 'touch /home/arom/apps/app/app.jar'
+ENTRYPOINT ["java","-jar","/home/arom/apps/app/app.jar"]
