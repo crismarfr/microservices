@@ -7,7 +7,7 @@ ENV JAR_FILE ./zipkin/target/Zipkin-0.0.1-SNAPSHOT.jar
 ADD $JAR_FILE /home/arom/apps/app/app.jar
 EXPOSE 9095
 USER 1001
-COPY ./zipkin/src/main/ressources/application.properties /config/application.properties
+COPY ./zipkin/src/main/resources/application.properties /config/application.properties
 RUN bash -c 'touch /home/arom/apps/app/app.jar'
 ENTRYPOINT ["java","-jar","/home/arom/apps/app/app.jar"]
 CMD "--spring.config.location=file:/config/"
