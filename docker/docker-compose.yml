@@ -198,4 +198,4 @@ networks:
         driver: bridge
 volumes:
     /home/arom/apps/configRepoServer:
-external: true
+        external: true
