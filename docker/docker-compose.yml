@@ -1,19 +1,19 @@
-version: '2'
+﻿version: '2'
 services:
     configserver:
         container_name: configserver
         build:
             context: ../configServer
             dockerfile: Dockerfile_configServer
-        image: configserver:latest
+        image: 'configserver:latest'
         expose:
             - 8888
         ports:
-            - 8888:8888
+            - '8888:8888'
         networks:
             - my_net
         volumes:
-            - /home/arom/apps/configRepoServer:/home/arom/apps/configRepoServer:z
+            - '/home/arom/apps/configRepoServer:/home/arom/apps/configRepoServer:z'
         logging:
             driver: json-file
     registry1:
@@ -21,13 +21,12 @@ services:
         build:
             context: ../annuaire
             dockerfile: Dockerfile_eureka1
-        image: registry1:latest
-        environment:
-            SPRING_PROFILES_ACTIVE=eureka1
+        image: 'registry1:latest'
+        environment: SPRING_PROFILES_ACTIVE=eureka1
         expose:
             - 8761
         ports:
-            - 8761:8761
+            - '8761:8761'
         networks:
             - my_net
         depends_on:
@@ -39,13 +38,12 @@ services:
         build:
             context: ../annuaire
             dockerfile: Dockerfile_eureka2
-        image: registry2:latest
-        environment:
-            SPRING_PROFILES_ACTIVE=eureka2
+        image: 'registry2:latest'
+        environment: SPRING_PROFILES_ACTIVE=eureka2
         expose:
             - 8762
         ports:
-            - 8762:8762
+            - '8762:8762'
         networks:
             - my_net
         depends_on:
@@ -57,14 +55,14 @@ services:
         build:
             context: ../gateway
             dockerfile: Dockerfile_gateway
-        image: gateway:latest
+        image: 'gateway:latest'
         expose:
             - 8080
         ports:
-            - 8080:8080
+            - '8080:8080'
         networks:
             - my_net
-        network_mode: "ip"
+        network_mode: ip
         depends_on:
             - config-server
         logging:
@@ -74,12 +72,12 @@ services:
         build:
             context: ../authServer
             dockerfile: Dockerfile_authServer
-        image: security:latest
+        image: 'security:latest'
         expose:
             - 8780
         networks:
             - my_net
-        network_mode: "ip"
+        network_mode: ip
         depends_on:
             - config-server
         logging:
@@ -89,14 +87,14 @@ services:
         build:
             context: ../hystrix
             dockerfile: Dockerfile_hystrix
-        image: monitoring:latest
+        image: 'monitoring:latest'
         expose:
             - 7080
         ports:
-            - 7080:7080
+            - '7080:7080'
         networks:
             - my_net
-        network_mode: "ip"
+        network_mode: ip
         depends_on:
             - config-server
         logging:
@@ -106,89 +104,89 @@ services:
         build:
             context: ../zipkin
             dockerfile: Dockerfile_zipkin
-        image: zipkin:latest
+        image: 'zipkin:latest'
         expose:
             - 9095
         ports:
-            - 9095:9095
+            - '9095:9095'
         networks:
             - my_net
-        network_mode: "ip"
+        network_mode: ip
         depends_on:
             - config-server
         logging:
             driver: json-file
-   mic1:
+    mic1:
         container_name: mic1
         build:
             context: ../microservice1
             dockerfile: Dockerfile_mic1
-        image: mic1:latest
+        image: 'mic1:latest'
         expose:
             - 8090
         networks:
             - my_net
-        network_mode: "ip"
+        network_mode: ip
         depends_on:
             - config-server
         logging:
             driver: json-file
-   mic2:
+    mic2:
         container_name: mic2
         build:
             context: ../microservice2
             dockerfile: Dockerfile_mic2
-        image: mic2:latest
+        image: 'mic2:latest'
         expose:
             - 8091
         networks:
             - my_net
-        network_mode: "ip"
+        network_mode: ip
         depends_on:
             - config-server
         logging:
             driver: json-file
-   mic3:
+    mic3:
         container_name: mic3
         build:
             context: ../microservice3
             dockerfile: Dockerfile_mic3
-        image: mic3:latest
+        image: 'mic3:latest'
         expose:
             - 8092
         networks:
             - my_net
-        network_mode: "ip"
+        network_mode: ip
         depends_on:
             - config-server
         logging:
             driver: json-file
-   mic4:
+    mic4:
         container_name: mic4
         build:
             context: ../microservice4
             dockerfile: Dockerfile_mic4
-        image: mic3:latest
+        image: 'mic3:latest'
         expose:
             - 8093
         networks:
             - my_net
-        network_mode: "ip"
+        network_mode: ip
         depends_on:
             - config-server
         logging:
             driver: json-file
-   mic5:
+    mic5:
         container_name: mic5
         build:
             context: ../microservice5
             dockerfile: Dockerfile_mic5
-        image: mic5:latest
+        image: 'mic5:latest'
         expose:
             - 8094
         networks:
             - my_net
-        network_mode: "ip"
+        network_mode: ip
         depends_on:
             - config-server
         logging:
@@ -197,5 +195,10 @@ networks:
     my_net:
         driver: bridge
 volumes:
+<<<<<<< HEAD
     /home/arom/apps/configRepoServer:
         external: true
+=======
+    /home/arom/apps/configRepoServer: null
+    external: true
+>>>>>>> 98b96e2e865759332d930d00dcd1b40ad4127d31
