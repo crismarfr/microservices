@@ -1,4 +1,4 @@
-﻿version: '2'
+﻿version: '2.1'
 services:
     configserver:
         container_name: configserver
@@ -16,6 +16,11 @@ services:
             - '/home/arom/apps/configRepoServer:/home/arom/apps/configRepoServer:z'
         logging:
             driver: json-file
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8888/microservice1/default"]
+            interval: 10s
+            timeout: 10s
+            retries: 6
     registry1:
         container_name: registry1
         build:
@@ -31,7 +36,8 @@ services:
         networks:
             - my_net
         depends_on:
-            - configserver
+            configserver:
+                condition: service_healthy
         logging:
             driver: json-file
     registry2:
@@ -49,7 +55,8 @@ services:
         networks:
             - my_net
         depends_on:
-            - configserver
+            configserver:
+                condition: service_healthy
         logging:
             driver: json-file
     gateway:
@@ -65,7 +72,8 @@ services:
         networks:
             - my_net
         depends_on:
-            - configserver
+            configserver:
+                condition: service_healthy
         logging:
             driver: json-file
     security:
@@ -79,7 +87,8 @@ services:
         networks:
             - my_net
         depends_on:
-            - configserver
+            configserver:
+                condition: service_healthy
         logging:
             driver: json-file
     monitoring:
@@ -95,7 +104,8 @@ services:
         networks:
             - my_net
         depends_on:
-            - configserver
+            configserver:
+                condition: service_healthy
         logging:
             driver: json-file
     zipkin:
@@ -111,7 +121,8 @@ services:
         networks:
             - my_net
         depends_on:
-            - configserver
+            configserver:
+                condition: service_healthy
         logging:
             driver: json-file
     mic1:
@@ -125,7 +136,8 @@ services:
         networks:
             - my_net
         depends_on:
-            - configserver
+            configserver:
+                condition: service_healthy
         logging:
             driver: json-file
     mic2:
@@ -139,7 +151,8 @@ services:
         networks:
             - my_net
         depends_on:
-            - configserver
+            configserver:
+                condition: service_healthy
         logging:
             driver: json-file
     mic3:
@@ -153,7 +166,8 @@ services:
         networks:
             - my_net
         depends_on:
-            - configserver
+            configserver:
+                condition: service_healthy
         logging:
             driver: json-file
     mic4:
@@ -161,13 +175,14 @@ services:
         build:
             context: ../microservice4
             dockerfile: Dockerfile_mic4
-        image: 'mic3:latest'
+        image: 'mic4:latest'
         expose:
             - 8093
         networks:
             - my_net
         depends_on:
-            - configserver
+            configserver:
+                condition: service_healthy
         logging:
             driver: json-file
     mic5:
@@ -181,7 +196,8 @@ services:
         networks:
             - my_net
         depends_on:
-            - configserver
+            configserver:
+                condition: service_healthy
         logging:
             driver: json-file
 networks:

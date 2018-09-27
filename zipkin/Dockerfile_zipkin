@@ -3,11 +3,11 @@ RUN mkdir -p config && mkdir -p /home/arom/apps/app && mkdir -p /home/arom/apps/
 RUN chown -R 1001:1001 /home/arom/apps/app /home/arom/apps/logs
 RUN chmod -R 777 config /home/arom/apps/app /home/arom/apps/logs
 VOLUME /home/arom/apps
-ENV JAR_FILE ./zipkin/target/Zipkin-0.0.1-SNAPSHOT.jar
+ENV JAR_FILE ./target/Zipkin-0.0.1-SNAPSHOT.jar
 ADD $JAR_FILE /home/arom/apps/app/app.jar
 EXPOSE 9095
 USER 1001
-COPY ./zipkin/src/main/resources/application.properties /config/application.properties
+COPY ./src/main/resources/application.properties /config/application.properties
 RUN bash -c 'touch /home/arom/apps/app/app.jar'
 ENTRYPOINT ["java","-jar","/home/arom/apps/app/app.jar"]
 CMD "--spring.config.location=file:/config/"

@@ -1,3 +1,3 @@
 sudo service firewalld stop
-sudo service docker stop
-sudo service docker start
+service docker stop
+service docker start
