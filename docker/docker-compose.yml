@@ -1,4 +1,4 @@
-version: '2'
+﻿version: '2'
 services:
     configserver:
         container_name: configserver
@@ -118,7 +118,7 @@ services:
             - config-server
         logging:
             driver: json-file
-   mic1:
+    mic1:
         container_name: mic1
         build:
             context: ../microservice1
@@ -133,7 +133,7 @@ services:
             - config-server
         logging:
             driver: json-file
-   mic2:
+    mic2:
         container_name: mic2
         build:
             context: ../microservice2
@@ -148,7 +148,7 @@ services:
             - config-server
         logging:
             driver: json-file
-   mic3:
+    mic3:
         container_name: mic3
         build:
             context: ../microservice3
@@ -163,7 +163,7 @@ services:
             - config-server
         logging:
             driver: json-file
-   mic4:
+    mic4:
         container_name: mic4
         build:
             context: ../microservice4
@@ -178,7 +178,7 @@ services:
             - config-server
         logging:
             driver: json-file
-   mic5:
+    mic5:
         container_name: mic5
         build:
             context: ../microservice5
@@ -198,4 +198,4 @@ networks:
         driver: bridge
 volumes:
     /home/arom/apps/configRepoServer:
-external: true
+    external: true
