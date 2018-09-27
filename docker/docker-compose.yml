@@ -195,5 +195,5 @@ networks:
     my_net:
         driver: bridge
 volumes:
-    /home/arom/apps/configRepoServer: null
+    /home/arom/apps/configRepoServer:
     external: true
