@@ -194,7 +194,3 @@ services:
 networks:
     my_net:
         driver: bridge
-volumes:
-    /home/arom/apps/configRepoServer:
-    external: 
-    name: /home/arom/apps/configRepoServer
