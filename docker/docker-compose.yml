@@ -31,7 +31,7 @@ services:
         networks:
             - my_net
         depends_on:
-            - config-server
+            - configserver
         logging:
             driver: json-file
     registry2:
@@ -49,7 +49,7 @@ services:
         networks:
             - my_net
         depends_on:
-            - config-server
+            - configserver
         logging:
             driver: json-file
     gateway:
@@ -66,7 +66,7 @@ services:
             - my_net
         network_mode: ip
         depends_on:
-            - config-server
+            - configserver
         logging:
             driver: json-file
     security:
@@ -81,7 +81,7 @@ services:
             - my_net
         network_mode: ip
         depends_on:
-            - config-server
+            - configserver
         logging:
             driver: json-file
     monitoring:
@@ -98,7 +98,7 @@ services:
             - my_net
         network_mode: ip
         depends_on:
-            - config-server
+            - configserver
         logging:
             driver: json-file
     zipkin:
@@ -115,7 +115,7 @@ services:
             - my_net
         network_mode: ip
         depends_on:
-            - config-server
+            - configserver
         logging:
             driver: json-file
     mic1:
@@ -130,7 +130,7 @@ services:
             - my_net
         network_mode: ip
         depends_on:
-            - config-server
+            - configserver
         logging:
             driver: json-file
     mic2:
@@ -145,7 +145,7 @@ services:
             - my_net
         network_mode: ip
         depends_on:
-            - config-server
+            - configserver
         logging:
             driver: json-file
     mic3:
@@ -160,7 +160,7 @@ services:
             - my_net
         network_mode: ip
         depends_on:
-            - config-server
+            - configserver
         logging:
             driver: json-file
     mic4:
@@ -175,7 +175,7 @@ services:
             - my_net
         network_mode: ip
         depends_on:
-            - config-server
+            - configserver
         logging:
             driver: json-file
     mic5:
@@ -190,7 +190,7 @@ services:
             - my_net
         network_mode: ip
         depends_on:
-            - config-server
+            - configserver
         logging:
             driver: json-file
 networks:
