@@ -23,7 +23,7 @@ services:
             dockerfile: Dockerfile_eureka1
         image: 'registry1:latest'
         environment: 
-            SPRING_PROFILES_ACTIVE=eureka1
+            - SPRING_PROFILES_ACTIVE=eureka1
         expose:
             - 8761
         ports:
@@ -41,7 +41,7 @@ services:
             dockerfile: Dockerfile_eureka2
         image: 'registry2:latest'
         environment: 
-            SPRING_PROFILES_ACTIVE=eureka2
+            - SPRING_PROFILES_ACTIVE=eureka2
         expose:
             - 8762
         ports:
