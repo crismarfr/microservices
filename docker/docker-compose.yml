@@ -64,7 +64,6 @@ services:
             - '8080:8080'
         networks:
             - my_net
-        network_mode: ip
         depends_on:
             - configserver
         logging:
@@ -79,7 +78,6 @@ services:
             - 8780
         networks:
             - my_net
-        network_mode: ip
         depends_on:
             - configserver
         logging:
@@ -96,7 +94,6 @@ services:
             - '7080:7080'
         networks:
             - my_net
-        network_mode: ip
         depends_on:
             - configserver
         logging:
@@ -113,7 +110,6 @@ services:
             - '9095:9095'
         networks:
             - my_net
-        network_mode: ip
         depends_on:
             - configserver
         logging:
@@ -128,7 +124,6 @@ services:
             - 8090
         networks:
             - my_net
-        network_mode: ip
         depends_on:
             - configserver
         logging:
@@ -143,7 +138,6 @@ services:
             - 8091
         networks:
             - my_net
-        network_mode: ip
         depends_on:
             - configserver
         logging:
@@ -158,7 +152,6 @@ services:
             - 8092
         networks:
             - my_net
-        network_mode: ip
         depends_on:
             - configserver
         logging:
@@ -173,7 +166,6 @@ services:
             - 8093
         networks:
             - my_net
-        network_mode: ip
         depends_on:
             - configserver
         logging:
@@ -188,7 +180,6 @@ services:
             - 8094
         networks:
             - my_net
-        network_mode: ip
         depends_on:
             - configserver
         logging:
