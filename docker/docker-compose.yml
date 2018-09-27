@@ -194,11 +194,3 @@ services:
 networks:
     my_net:
         driver: bridge
-volumes:
-<<<<<<< HEAD
-    /home/arom/apps/configRepoServer:
-        external: true
-=======
-    /home/arom/apps/configRepoServer: null
-    external: true
->>>>>>> 98b96e2e865759332d930d00dcd1b40ad4127d31
