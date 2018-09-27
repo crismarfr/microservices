@@ -3,7 +3,7 @@ services:
     configserver:
         container_name: configserver
         build:
-            context: ./configServer
+            context: ../configServer
             dockerfile: Dockerfile_configServer
         image: 'configserver:latest'
         expose:
@@ -19,7 +19,7 @@ services:
     registry1:
         container_name: registry1
         build:
-            context: ./annuaire
+            context: ../annuaire
             dockerfile: Dockerfile_eureka1
         image: 'registry1:latest'
         environment: 
@@ -37,7 +37,7 @@ services:
     registry2:
         container_name: registry2
         build:
-            context: ./annuaire
+            context: ../annuaire
             dockerfile: Dockerfile_eureka2
         image: 'registry2:latest'
         environment: 
@@ -55,7 +55,7 @@ services:
     gateway:
         container_name: gateway
         build:
-            context: ./gateway
+            context: ../gateway
             dockerfile: Dockerfile_gateway
         image: 'gateway:latest'
         expose:
@@ -71,7 +71,7 @@ services:
     security:
         container_name: security
         build:
-            context: ./authServer
+            context: ../authServer
             dockerfile: Dockerfile_authServer
         image: 'security:latest'
         expose:
@@ -85,7 +85,7 @@ services:
     monitoring:
         container_name: monitoring
         build:
-            context: ./hystrix
+            context: ../hystrix
             dockerfile: Dockerfile_hystrix
         image: 'monitoring:latest'
         expose:
@@ -101,7 +101,7 @@ services:
     zipkin:
         container_name: zipkin
         build:
-            context: ./zipkin
+            context: ../zipkin
             dockerfile: Dockerfile_zipkin
         image: 'zipkin:latest'
         expose:
@@ -117,7 +117,7 @@ services:
     mic1:
         container_name: mic1
         build:
-            context: ./microservice1
+            context: ../microservice1
             dockerfile: Dockerfile_mic1
         image: 'mic1:latest'
         expose:
@@ -131,7 +131,7 @@ services:
     mic2:
         container_name: mic2
         build:
-            context: ./microservice2
+            context: ../microservice2
             dockerfile: Dockerfile_mic2
         image: 'mic2:latest'
         expose:
@@ -145,7 +145,7 @@ services:
     mic3:
         container_name: mic3
         build:
-            context: ./microservice3
+            context: ../microservice3
             dockerfile: Dockerfile_mic3
         image: 'mic3:latest'
         expose:
@@ -159,7 +159,7 @@ services:
     mic4:
         container_name: mic4
         build:
-            context: ./microservice4
+            context: ../microservice4
             dockerfile: Dockerfile_mic4
         image: 'mic3:latest'
         expose:
@@ -173,7 +173,7 @@ services:
     mic5:
         container_name: mic5
         build:
-            context: ./microservice5
+            context: ../microservice5
             dockerfile: Dockerfile_mic5
         image: 'mic5:latest'
         expose:
