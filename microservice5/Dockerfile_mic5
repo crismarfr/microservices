@@ -1,11 +1,11 @@
 FROM java:8-jre
+RUN groupadd arom
+RUN useradd arom -g arom
 RUN mkdir -p /home/arom/apps/app && mkdir -p /home/arom/apps/logs
-RUN chown -R 1001:1001 /home/arom/apps/app /home/arom/apps/logs
-RUN chmod -R 777 /home/arom/apps/app /home/arom/apps/logs
-VOLUME /home/arom/apps
 ENV JAR_FILE ./target/microservice5-0.0.1-SNAPSHOT.jar
 ADD $JAR_FILE /home/arom/apps/app/app.jar
-USER 1001
+RUN chown -R arom:arom /home/arom
+RUN chmod -R 777 /home/arom
+USER arom
 EXPOSE 8094
-RUN bash -c 'touch /home/arom/apps/app/app.jar'
 ENTRYPOINT ["java","-jar","/home/arom/apps/app/app.jar"]
