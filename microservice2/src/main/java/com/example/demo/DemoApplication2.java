@@ -34,21 +34,25 @@ public class DemoApplication2{
 	
 	@PreAuthorize("#oauth2.hasScope('microservice2')")
 	@RequestMapping(value="/callMicroservice", method=RequestMethod.GET)
-	@HystrixCommand(fallbackMethod = "defaultCallMicroservice")
+	
 	public Message callMicroservice(){
-		Message mess=new Message();
+		Message mess=new Message();		
+		log.info("Thread start");
+		
 		mess.setMess("Status OK microservice2 !");
 		
 		log.info(mess.getMess());
+		
 		return mess;
 	}
 	
 	 private Message defaultCallMicroservice() {
 		 Message mess=new Message();
-			mess.setMess("Mode dégradé : Status OK microservice2 !");
+		 mess.setMess("Mode dégradé : Status OK microservice2 !");
 			
-			log.info(mess.getMess());
-			return mess;
+		 log.info(mess.getMess());
+		 
+	     return mess;
 	}
 	
 	@Autowired

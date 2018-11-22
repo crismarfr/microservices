@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.time.Instant;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,22 +36,47 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 @EnableResourceServer
 @EnableOAuth2Client
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class DemoApplication1{
+public class DemoApplication1 {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	static AppelClient appelClient;
 	
 	@PreAuthorize("#oauth2.hasScope('microservice1')")
 	@RequestMapping(value="/callMicroservice", method=RequestMethod.GET)
-	@HystrixCommand(fallbackMethod = "defaultCallMicroservice")
-	public Message callMicroservice(){
+	public Message callMicroservice() {
 		Message mess=new Message();
-		mess.setMess("Status OK microservice1 !");
+//		try
+//		{
+//		log.info("Thread start");
 		
+		mess.setMess("Status OK microservice1 !");
+			
 		log.info(mess.getMess());
+		
+/*		Instant future=Instant.now().plusSeconds(1);
+		do {
+		log.info("Thread run");		
+		isInterruptedHystrix();
+		}
+		while (Instant.now().compareTo(future) <= 0);		
+*/		
+/*		}
+		catch(InterruptedException ex)
+		{
+			log.info("Thread interrupted :"+ ex.getMessage());
+		}
+*/
 		return mess;
 	}
-	
+/*	
+	private void isInterruptedHystrix() throws InterruptedException 
+	{
+		if (Thread.currentThread().isInterrupted()) {
+            throw new InterruptedException("Hystrix timeOut");
+        }
+	}
+*/	
 	 private Message defaultCallMicroservice() {
 		 Message mess=new Message();
 			mess.setMess("Mode dégradé : Status microservice1 OK !");
@@ -60,12 +87,10 @@ public class DemoApplication1{
 	 
 	@PreAuthorize("#oauth2.hasScope('microservice2')")
 	@RequestMapping(value="/callMicroservice2", method=RequestMethod.GET)
-	
 	 private Message appelMicroservice2() {
-			
+		
 		Message mess=new Message();
-		mess.setMess(callMicroservice().getMess() +" --- "+ appelClient.getMessage().getMess());
-				
+		mess.setMess(callMicroservice().getMess() +" --- "+ appelClient.getMessage().getMess());				
 //		log.info(mess.getMess());
 		return mess;
 	}
