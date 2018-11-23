@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: ZuulServer
+
+server:
+  port: 8080
+
+zuul:
+  trace-request-body: true
+  routes: 
+     microservice1:
+      path: /api1/**
+      service-id: microservice1
+      sensitive-headers:
+
+     microservice2:
+      path: /api2/**
+      service-id: microservice2
+      sensitive-headers:
+
+     microservice3:
+      path: /api3/**
+      service-id: microservice3
+      sensitive-headers:
+
+     microservice4:
+      path: /api4/**
+      service-id: microservice4
+      sensitive-headers:
+
+     microservice6:
+      path: /api6/**
+      service-id: microservice6
+      sensitive-headers:
+
+     microservice6:
+      path: /api6/**
+      service-id: microservice6
+      sensitive-headers:
+
+     auth-server: 
+      path: /uaa/**
+      service-id: auth-server
+      sensitive-headers: 
+
+eureka:
+  instance:
+    hostname: registry1
+    preferIpAddress: true
+  client:
+    eureka-server-port: 8761
+    service-url.defaultZone: http://${eureka.instance.hostname}:${eureka.client.eureka-server-port}/eureka/,http://${eureka.backup.instance.hostname}:${eureka.backup.instance.port}/eureka/   
+  backup: 
+    instance:
+      hostname: registry2
+      port: 8762
+
+logging:
+  file: /home/arom/apps/logs/${spring.application.name}.log
