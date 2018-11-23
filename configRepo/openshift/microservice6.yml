@@ -38,3 +38,4 @@ eureka:
 
 logging:
   file: /home/arom/apps/logs/${spring.application.name}.log
+
