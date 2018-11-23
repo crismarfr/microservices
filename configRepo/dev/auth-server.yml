@@ -11,10 +11,12 @@ security:
     enabled: true
 
 security:
-   user:
+  basic:
+    enabled: true
+  user:
     name: root
     password: password
-   oauth2:
+  oauth2:
     client:
       client-id: acme
       client-secret: secret

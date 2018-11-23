@@ -7,38 +7,28 @@ server:
 
 zuul:
   trace-request-body: true
-  routes: 
-     microservice1:
+  routes:
+    microservice1:
       path: /api1/**
       service-id: microservice1
       sensitive-headers:
-
-     microservice2:
+    microservice2:
       path: /api2/**
       service-id: microservice2
       sensitive-headers:
-
-     microservice3:
+    microservice3:
       path: /api3/**
       service-id: microservice3
       sensitive-headers:
-
-     microservice4:
+    microservice4:
       path: /api4/**
       service-id: microservice4
       sensitive-headers:
-
-     microservice6:
+    microservice6:
       path: /api6/**
       service-id: microservice6
       sensitive-headers:
-
-     microservice6:
-      path: /api6/**
-      service-id: microservice6
-      sensitive-headers:
-
-     auth-server: 
+    auth-server: 
       path: /uaa/**
       service-id: auth-server
       sensitive-headers: 
