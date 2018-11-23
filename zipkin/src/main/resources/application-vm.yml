@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: zipkin
+  cloud:
+    config:
+      uri: http://configserver:8888
+server:
+  port: 9095 
+
+logging:
+  file: /home/arom/apps/logs/${spring.application.name}.log

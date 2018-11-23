@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: microservice1
+  cloud:
+    config:
+      uri: http://configserver:8888
+server:
+  port: 8090 
+  
+gateway:
+  hostname: gateway
+  port: 8080

@@ -1,13 +1,12 @@
 FROM java:8-jre
-RUN mkdir -p config && mkdir -p /home/arom/apps/app && mkdir -p /home/arom/apps/logs
-RUN chown -R 1001:1001 /home/arom/apps/app /home/arom/apps/logs
-RUN chmod -R 777 config /home/arom/apps/app /home/arom/apps/logs
-VOLUME /home/arom/apps
+RUN groupadd arom
+RUN useradd arom -g arom
+RUN mkdir -p /home/arom/apps/app && mkdir -p /home/arom/apps/logs 
 ENV JAR_FILE ./target/Zipkin-0.0.1-SNAPSHOT.jar
 ADD $JAR_FILE /home/arom/apps/app/app.jar
+RUN chown -R arom:arom /home/arom
+RUN chmod -R 777 /home/arom
+USER arom
 EXPOSE 9095
-USER 1001
-COPY ./src/main/resources/application.properties /config/application.properties
-RUN bash -c 'touch /home/arom/apps/app/app.jar'
-ENTRYPOINT ["java","-jar","/home/arom/apps/app/app.jar"]
-CMD "--spring.config.location=file:/config/"
+ENTRYPOINT ["java","-jar","/home/arom/apps/app/app.jar"] 
+CMD "--spring.profiles.active=vm"
