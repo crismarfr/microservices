@@ -1,0 +1,36 @@
+server:
+  port: 8888
+  
+spring:
+  application:
+      name: configServer
+  cloud:
+    config:
+        server:
+            git:
+              uri: https://github.com/crismarfr/microservices.git
+              username: crismarfr@hotmail.fr
+              password: Celyan2008
+              search-paths: configRepo/vm
+
+eureka:
+  instance:
+    preferIpAddress: true
+    hostname: registry1
+  client: 
+    eureka-server-port: 8761
+    service-url :
+       defaultZone: http://${eureka.instance.hostname}:${eureka.client.eureka-server-port}/eureka/,http://${eureka.backup.instance.hostname}:${eureka.backup.instance.port}/eureka/
+  backup: 
+     instance:
+        hostname: registry2  
+        port: 8762    
+
+logging:
+  file: /home/arom/apps/logs/${spring.application.name}.log
+
+
+
+
+
+
