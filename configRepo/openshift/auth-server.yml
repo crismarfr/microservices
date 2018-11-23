@@ -32,7 +32,6 @@ eureka:
     instance:
       hostname: registry2
       port: 8762
-      preferIpAddress: true
 
 logging:
   file: /home/arom/apps/logs/${spring.application.name}.log
