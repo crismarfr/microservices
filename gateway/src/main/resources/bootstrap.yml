@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: ZuulServer
+  cloud:
+    config:
+      uri: http://configserver:8888
+server:
+  port: 8080
+
+
+
