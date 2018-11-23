@@ -8,5 +8,4 @@ RUN chown -R arom:arom /home/arom
 RUN chmod -R 777 /home/arom
 USER arom
 EXPOSE 8888
-ENTRYPOINT ["java","-jar","/home/arom/apps/app/app.jar"]
-CMD "--spring.profiles.active=openshift"
+ENTRYPOINT ["java","-Dspring.profiles.active=openshift","-jar","/home/arom/apps/app/app.jar"]
