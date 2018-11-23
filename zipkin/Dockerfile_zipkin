@@ -9,3 +9,4 @@ RUN chmod -R 777 /home/arom
 USER arom
 EXPOSE 9095
 ENTRYPOINT ["java","-jar","/home/arom/apps/app/app.jar"] 
+CMD "--spring.profiles.active=vm"
