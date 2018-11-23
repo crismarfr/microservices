@@ -4,7 +4,7 @@ services:
         container_name: configserver
         build:
             context: ../configServer
-            dockerfile: Dockerfile_configServer
+            dockerfile: Dockerfile_configServer_vm
         image: 'configserver:latest'
         expose:
             - 8888
