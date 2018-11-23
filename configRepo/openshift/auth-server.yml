@@ -22,6 +22,7 @@ security:
 eureka:
   instance:
     hostname: registry1
+    preferIpAddress: true
   client:
     eureka-server-port: 8761
     service-url: 
