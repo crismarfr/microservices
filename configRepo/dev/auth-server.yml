@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: auth-server
+    index: 1
+
+server:
+	port: 8780
+
+security:
+	basic:
+		enabled: true
+
+security:
+	user:
+		name: root
+		password: password
+	oauth2:
+		client:
+			client-id: acme
+			client-secret: secret
+			scope: microservice1, microservice2, microservice3, microservice4, microservice6
+			authorized-grant-types: password,refresh_token
+
+eureka:
+	instance:
+		hostname: registry1
+	client:
+		eureka-server-port: 8761
+		service-url: 
+			defaultZone: http://${eureka.instance.hostname}:${eureka.client.eureka-server-port}/eureka/,http://${eureka.backup.instance.hostname}:${eureka.backup.instance.port}/eureka/
+	backup:
+		instance:
+			hostname: registry2
+			port: 8762
+			preferIpAddress: true
+
+logging:
+	file: D:/Mes documents/tmp/logs/${spring.application.name}.log 

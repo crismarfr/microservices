@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: EurekaServer1
+    index: 1
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: registry2
+    port: 8762
+    preferIpAddress: true
+    metadataMap:
+      instanceId: EUREKA${spring.application.index}_${spring.application.name}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+
+logging:
+  file: /home/arom/apps/logs/${spring.application.name}.log
