@@ -11,7 +11,7 @@ spring:
               uri: https://github.com/crismarfr/microservices.git
               username: crismarfr@hotmail.fr
               password: Celyan2008
-              search-paths: configRepo/dev
+              search-paths: configRepo/vm
 
 eureka:
   instance:
