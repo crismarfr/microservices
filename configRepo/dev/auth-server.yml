@@ -9,10 +9,6 @@ server:
 security:
   basic:
     enabled: true
-
-security:
-  basic:
-    enabled: true
   user:
     name: root
     password: password
