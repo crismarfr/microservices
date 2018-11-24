@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.bean.Message;
 
-@Component
-@FeignClient(name="microservice1-client", url="http://localhost:8090", fallback=AppelClientFallBack.class)
+@FeignClient(name="microservice1-client", url="http://localhost:8094", fallback=AppelClientFallBack.class)
 public interface AppelClient {	
-	@RequestMapping(value="/sayHello", method=RequestMethod.GET)
+	@RequestMapping(value="/callMicroservice", method=RequestMethod.GET)
 	public Message getMessage();
 }

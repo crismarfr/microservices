@@ -6,38 +6,3 @@ spring:
       uri: http://configserver:8888
 server:
   port: 8091 
-
-### Hystrix
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          strategy: THREAD
-          thread:
-            timeoutInMilliseconds: 10000
-            interruptOnTimeout: true
-            interruptOnCancel: false
-        timeout:
-          enabled: true
-      fallback:
-        enabled: false
-      circuitBreaker:
-        enabled: true
-        requestVolumeThreshold: 20
-        sleepWindowInMilliseconds: 5000
-        errorThresholdPercentage: 50
-        forceOpen: false
-        forceClosed: false
-  threadpool:
-    platformThreadPool:
-      coreSize: 10
-      maximumSize: 10
-      maxQueueSize: -1
-      queueSizeRejectionThreshold: 5
-      keepAliveTimeMinutes: 1
-      allowMaximumSizeToDivergeFromCoreSize: false
-      metrics:
-        rollingStats:
-          timeInMilliseconds: 10000
-          numBuckets: 10
