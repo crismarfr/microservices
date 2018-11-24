@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.bean.Message;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @SpringBootApplication
 @EnableHystrix
@@ -37,7 +36,6 @@ public class DemoApplication2{
 	
 	public Message callMicroservice(){
 		Message mess=new Message();		
-		log.info("Thread start");
 		
 		mess.setMess("Status OK microservice2 !");
 		

@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import java.time.Instant;
+//import java.time.Instant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,11 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.bean.Message;
 import com.example.feign.OAuth2FeignAutoConfiguration;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+//import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @SpringBootApplication
 @ImportAutoConfiguration(OAuth2FeignAutoConfiguration.class)
-@EnableFeignClients
+@EnableFeignClients("com.example.demo")
 @EnableHystrix
 @EnableEurekaClient
 @RestController
@@ -39,7 +39,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 public class DemoApplication1 {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	
+		
 	static AppelClient appelClient;
 	
 	@PreAuthorize("#oauth2.hasScope('microservice1')")
@@ -90,7 +90,7 @@ public class DemoApplication1 {
 	 private Message appelMicroservice2() {
 		
 		Message mess=new Message();
-		mess.setMess(callMicroservice().getMess() +" --- "+ appelClient.getMessage().getMess());				
+		mess.setMess(/*callMicroservice().getMess() +" --- "+ */appelClient.getMessage().getMess());				
 //		log.info(mess.getMess());
 		return mess;
 	}
