@@ -3,6 +3,9 @@ spring:
     name: HystrixServer
   cloud:
     config:
-      uri: http://configserver:8888
+      uri: http://configserver:8888 
+    
 server:
   port: 7080 
+  
+  

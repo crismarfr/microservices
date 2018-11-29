@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +29,7 @@ import com.example.feign.OAuth2FeignAutoConfiguration;
 
 @SpringBootApplication
 @ImportAutoConfiguration(OAuth2FeignAutoConfiguration.class)
-@EnableFeignClients("com.example.demo")
+@EnableFeignClients
 @EnableHystrix
 @EnableEurekaClient
 @RestController
@@ -90,7 +90,7 @@ public class DemoApplication1 {
 	 private Message appelMicroservice2() {
 		
 		Message mess=new Message();
-		mess.setMess(/*callMicroservice().getMess() +" --- "+ */appelClient.getMessage().getMess());				
+		mess.setMess(callMicroservice().getMess() +" --- "+ appelClient.getMessage().getMess());				
 //		log.info(mess.getMess());
 		return mess;
 	}

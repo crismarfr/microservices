@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.example.demo.bean.Message;
 

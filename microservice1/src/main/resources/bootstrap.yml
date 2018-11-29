@@ -4,9 +4,20 @@ spring:
   cloud:
     config:
       uri: http://configserver:8888
+  security:
+    user:
+      name: root
+      password: password
+      
 server:
   port: 8090 
   
 gateway:
   hostname: gateway
   port: 8080
+     
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

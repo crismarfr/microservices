@@ -6,18 +6,17 @@ spring:
 server:
   port: 8780
 
+spring:
+  application:
+    name: auth-server
+
 security:
-  basic:
-    enabled: true
-  user:
-    name: root
-    password: password
-  oauth2:
-    client:
-      client-id: acme
-      client-secret: secret
-      scope: microservice1, microservice2, microservice3, microservice4, microservice6
-      authorized-grant-types: password,refresh_token
+    oauth2:
+      client:
+        client-id: acme
+        client-secret: secret
+        scope: microservice1, microservice2, microservice3, microservice4, microservice6
+        authorized-grant-types: password,refresh_token
 
 eureka:
   instance:
