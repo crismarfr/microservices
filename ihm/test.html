@@ -9,10 +9,10 @@
    </head>
    
    <body>
-      <h2>AngularJS Sample Application Authentification OAuth2</h2>
+      <h2>AngularJS Sample Application ATOM Architecture</h2>
       
       <div ng-app = "mainApp" ng-controller = "AuthController">
-		<p>Scope(s) : <input type="text" ng-model="token"></p>
+		<p>Scope(s) : <input type="text" ng-model="token" size="100" ></p>
 		 <button ng-click = "auth()">Get token from SSO</button>
 		 <button ng-click = "authCache()">Get token from cache</button>
 		 <button ng-click = "deleteAuthCache()">Delete token from cache</button>
@@ -21,6 +21,9 @@
 		 <button ng-click = "authMic1()">Appel du microservice2</button>
 		 <button ng-click = "authMic2()">Appel du microservice3</button>
 		 <button ng-click = "authMic3()">Appel du microservice4</button>
+		 <br>
+		 <button ng-click = "authMic4()">Appel du microservice1 -> microservice2</button>
+		 </br>
          <p>Result: {{result}}</p>
       </div>
       
@@ -118,7 +121,7 @@
 	
 	service.callMic = function ($scope) {
 		$http({
-			url: 'http://localhost:8080/api1/sayHello',
+			url: 'http://localhost:8080/api1/callMicroservice',
 			method: "get",
 			headers: {
 			'Accept': 'application/json',
@@ -138,7 +141,7 @@
 
 	service.callMic1 = function ($scope) {
 		$http({
-			url: 'http://localhost:8080/api2/sayHello',
+			url: 'http://localhost:8080/api2/callMicroservice',
 			method: "get",
 			headers: {
 			'Accept': 'application/json',
@@ -158,7 +161,7 @@
 	
 	service.callMic2 = function ($scope) {
 		$http({
-			url: 'http://localhost:8080/api3/sayHello',
+			url: 'http://localhost:8080/api3/callMicroservice',
 			method: "get",
 			headers: {
 			'Accept': 'application/json',
@@ -178,7 +181,27 @@
 	
 	service.callMic3 = function ($scope) {
 		$http({
-			url: 'http://localhost:8080/api4/sayHello',
+			url: 'http://localhost:8080/api4/callMicroservice',
+			method: "get",
+			headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Access-Control-Allow-Credentials': 'true',
+			}
+		})
+		.success(function (data) {
+			console.log("Successful: response from submitting data to server was: ", data);
+			$scope.result=data;
+		})
+		.error(function (response) {
+			console.log("Failed: response from submitting data to server was: ", response);
+			$scope.result=response;
+		});	
+	}
+	
+		service.callMic4 = function ($scope) {
+		$http({
+			url: 'http://localhost:8080/api1/callMicroservice2',
 			method: "get",
 			headers: {
 			'Accept': 'application/json',
@@ -224,6 +247,10 @@
 		this.authMic3 = function(a, b, c, d) {
 		   Auth1Service.useTokenFromCache(d);
 		   return Auth1Service.callMic3(d);
+		}	
+		this.authMic4 = function(a, b, c, d) {
+		   Auth1Service.useTokenFromCache(d);
+		   return Auth1Service.callMic4(d);
 		}			
 		this.authRefresh = function(a, b, c, d) {
 		   Auth1Service.useTokenFromCache(d);
@@ -252,7 +279,10 @@
             }	
 	    $scope.authMic3 = function() {
             $scope.result = AuthService.authMic3($q,localStorageService, $http, $scope);
-            }				
+            }	
+		$scope.authMic4 = function() {
+            $scope.result = AuthService.authMic4($q,localStorageService, $http, $scope);
+            }			
 	    $scope.authRefresh = function() {
             $scope.result = AuthService.authRefresh($q,localStorageService, $http, $scope);
             }
@@ -261,4 +291,5 @@
       
    </body>
 </html>
+
 

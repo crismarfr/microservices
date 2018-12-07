@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: microservice6
+    
+server:
+  port: 8095
+
+

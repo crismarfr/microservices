@@ -6,3 +6,9 @@ spring:
         uri: http://configserver:8888
 server:
     port: 8761
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

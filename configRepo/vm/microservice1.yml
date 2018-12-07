@@ -12,10 +12,7 @@ spring:
 server:
   port: 8090
 
-security:
-  user:
-    name: root
-    password: password
+security:  
   oauth2:
     resource:
       user-info-uri: http://${gateway.hostname}:${gateway.port}/uaa/user
@@ -30,7 +27,8 @@ eureka:
     preferIpAddress: true
   client:
     eureka-server-port: 8761
-    service-url.defaultZone: http://${eureka.instance.hostname}:${eureka.client.eureka-server-port}/eureka/,http://${eureka.backup.instance.hostname}:${eureka.backup.instance.port}/eureka/   
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.client.eureka-server-port}/eureka/,http://${eureka.backup.instance.hostname}:${eureka.backup.instance.port}/eureka/   
   backup: 
     instance:
       hostname: registry2

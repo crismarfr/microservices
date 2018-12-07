@@ -1,11 +1,21 @@
 spring:
   application:
     name: zipkin
-  cloud:
-    config:
-      uri: http://configserver:8888
+  main:
+    allow-bean-definition-overriding: true
 server:
   port: 9095 
 
 logging:
   file: D:/Mes documents/tmp/logs/${spring.application.name}.log
+  
+
+management: 
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    web:
+      server: 
+        auto-time-requests: false
