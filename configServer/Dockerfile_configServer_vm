@@ -8,7 +8,5 @@ RUN chown -R arom:arom config /home/arom
 RUN chmod -R 777 config /home/arom
 USER arom
 EXPOSE 8888
-COPY ./src/main/resources/bootstrap-vm.yml /config/application.yml
 ENTRYPOINT ["java","-Dspring.profiles.active=vm","-jar","/home/arom/apps/app/app.jar"]
-CMD "--spring.config.location=file:/config/"
 
