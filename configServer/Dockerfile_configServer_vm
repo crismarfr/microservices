@@ -10,3 +10,4 @@ USER arom
 EXPOSE 8888
 ENTRYPOINT ["java","-jar","/home/arom/apps/app/app.jar"]
 
+
