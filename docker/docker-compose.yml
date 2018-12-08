@@ -6,14 +6,14 @@ services:
             context: ../configServer
             dockerfile: Dockerfile_configServer_vm
         image: 'configserver:latest'
+        environment: 
+            - SPRING_PROFILES_ACTIVE=vm
         expose:
             - 8888
         ports:
             - '8888:8888'
         networks:
             - my_net
-        volumes:
-            - '/home/arom/apps/configRepoServer:/home/arom/apps/configRepoServer:z'
         logging:
             driver: json-file
         healthcheck:
