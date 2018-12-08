@@ -4,10 +4,10 @@ services:
         container_name: configserver
         build:
             context: ../configServer
-            dockerfile: Dockerfile_configServer_vm
+            dockerfile: Dockerfile_configServer_docker
         image: 'configserver:latest'
         environment: 
-            - SPRING_PROFILES_ACTIVE=vm
+            - SPRING_PROFILES_ACTIVE=docker
         expose:
             - 8888
         ports:

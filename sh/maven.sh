@@ -1,26 +1,26 @@
 cd ../annuaire
-mvn package
+mvn clean package
 cd ../hystrix
-mvn package
+mvn clean package
 cd ../microservice1
-mvn package
+mvn clean package
 cd ../microservice3  
-mvn package
+mvn clean package
 cd ../microservice5 
-mvn package
+mvn clean package
 cd ../authServer  
-mvn package
+mvn clean package
 cd ../configServer
-mvn package
+mvn clean package
 cd ../gateway 
-mvn package
+mvn clean package
 cd ../microservice2 
-mvn package
+mvn clean package
 cd ../microservice4
-mvn package
+mvn clean package
 cd ../microservice6
-mvn package
+mvn clean package
 cd ../reactMicroservice
-mvn package
+mvn clean package
 cd ../zipkin
-mvn package
+mvn clean package
