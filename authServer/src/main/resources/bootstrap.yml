@@ -8,8 +8,6 @@ spring:
     user:
       name: root
       password: password
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
 server:
   port: 8780
   
