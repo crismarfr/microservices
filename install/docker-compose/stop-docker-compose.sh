@@ -1,1 +1,1 @@
-docker-compose -f ./docker/docker-compose.yml stop
+docker-compose -f ./config/docker-compose.yml stop
