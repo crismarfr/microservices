@@ -1,0 +1,205 @@
+﻿version: '2.1'
+services:
+    configserver:
+        container_name: configserver
+        build:
+            context: ../../../configServer
+            dockerfile: Dockerfile_configServer_docker
+        image: 'configserver:latest'
+        environment: 
+            - SPRING_PROFILES_ACTIVE=docker
+        expose:
+            - 8888
+        ports:
+            - '8888:8888'
+        networks:
+            - my_net
+        logging:
+            driver: json-file
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8888/microservice1/default"]
+            interval: 10s
+            timeout: 10s
+            retries: 6
+    registry1:
+        container_name: registry1
+        build:
+            context: ../../../annuaire
+            dockerfile: Dockerfile_eureka1
+        image: 'registry1:latest'
+        environment: 
+            - SPRING_PROFILES_ACTIVE=eureka1
+        expose:
+            - 8761
+        ports:
+            - '8761:8761'
+        networks:
+            - my_net
+        depends_on:
+            configserver:
+                condition: service_healthy
+        logging:
+            driver: json-file
+    registry2:
+        container_name: registry2
+        build:
+            context: ../../../annuaire
+            dockerfile: Dockerfile_eureka2
+        image: 'registry2:latest'
+        environment: 
+            - SPRING_PROFILES_ACTIVE=eureka2
+        expose:
+            - 8762
+        ports:
+            - '8762:8762'
+        networks:
+            - my_net
+        depends_on:
+            configserver:
+                condition: service_healthy
+        logging:
+            driver: json-file
+    gateway:
+        container_name: gateway
+        build:
+            context: ../../../gateway
+            dockerfile: Dockerfile_gateway
+        image: 'gateway:latest'
+        expose:
+            - 8082
+        ports:
+            - '8082:8080'
+        networks:
+            - my_net
+        depends_on:
+            configserver:
+                condition: service_healthy
+        logging:
+            driver: json-file
+    security:
+        container_name: security
+        build:
+            context: ../../../authServer
+            dockerfile: Dockerfile_authServer
+        image: 'security:latest'
+        expose:
+            - 8780
+        networks:
+            - my_net
+        depends_on:
+            configserver:
+                condition: service_healthy
+        logging:
+            driver: json-file
+    monitoring:
+        container_name: monitoring
+        build:
+            context: ../../../hystrix
+            dockerfile: Dockerfile_hystrix
+        image: 'monitoring:latest'
+        expose:
+            - 7080
+        ports:
+            - '7080:7080'
+        networks:
+            - my_net
+        depends_on:
+            configserver:
+                condition: service_healthy
+        logging:
+            driver: json-file
+    zipkin:
+        container_name: zipkin
+        build:
+            context: ../../../zipkin
+            dockerfile: Dockerfile_zipkin
+        image: 'zipkin:latest'
+        expose:
+            - 9095
+        ports:
+            - '9095:9095'
+        networks:
+            - my_net
+        depends_on:
+            configserver:
+                condition: service_healthy
+        logging:
+            driver: json-file
+    mic1:
+        container_name: mic1
+        build:
+            context: ../../../microservice1
+            dockerfile: Dockerfile_mic1
+        image: 'mic1:latest'
+        expose:
+            - 8090
+        networks:
+            - my_net
+        depends_on:
+            configserver:
+                condition: service_healthy
+        logging:
+            driver: json-file
+    mic2:
+        container_name: mic2
+        build:
+            context: ../../../microservice2
+            dockerfile: Dockerfile_mic2
+        image: 'mic2:latest'
+        expose:
+            - 8091
+        networks:
+            - my_net
+        depends_on:
+            configserver:
+                condition: service_healthy
+        logging:
+            driver: json-file
+    mic3:
+        container_name: mic3
+        build:
+            context: ../../../microservice3
+            dockerfile: Dockerfile_mic3
+        image: 'mic3:latest'
+        expose:
+            - 8092
+        networks:
+            - my_net
+        depends_on:
+            configserver:
+                condition: service_healthy
+        logging:
+            driver: json-file
+    mic4:
+        container_name: mic4
+        build:
+            context: ../../../microservice4
+            dockerfile: Dockerfile_mic4
+        image: 'mic4:latest'
+        expose:
+            - 8093
+        networks:
+            - my_net
+        depends_on:
+            configserver:
+                condition: service_healthy
+        logging:
+            driver: json-file
+    mic5:
+        container_name: mic5
+        build:
+            context: ../../../microservice5
+            dockerfile: Dockerfile_mic5
+        image: 'mic5:latest'
+        expose:
+            - 8094
+        networks:
+            - my_net
+        depends_on:
+            configserver:
+                condition: service_healthy
+        logging:
+            driver: json-file
+networks:
+    my_net:
+        driver: bridge
