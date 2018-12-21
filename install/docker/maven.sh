@@ -1,26 +1,26 @@
 cd ../../annuaire
 mvn clean package -DskipTests
-cd ../../hystrix
+cd ../hystrix
 mvn clean package -DskipTests
-cd ../../microservice1
+cd ../microservice1
 mvn clean package -DskipTests
-cd ../../microservice3  
+cd ../microservice3  
 mvn clean package -DskipTests
-cd ../../microservice5 
+cd ../microservice5 
 mvn clean package -DskipTests
-cd ../../authServer  
+cd ../authServer  
 mvn clean package -DskipTests
-cd ../../configServer
+cd ../configServer
 mvn clean package -DskipTests
-cd ../../gateway 
+cd ../gateway 
 mvn clean package -DskipTests
-cd ../../microservice2 
+cd ../microservice2 
 mvn clean package -DskipTests
-cd ../../microservice4
+cd ../microservice4
 mvn clean package -DskipTests
-cd ../../microservice6
+cd ../microservice6
 mvn clean package -DskipTests
-cd ../../reactMicroservice
+cd ../reactMicroservice
 mvn clean package -DskipTests
-cd ../../zipkin
+cd ../zipkin
 mvn clean package -DskipTests
