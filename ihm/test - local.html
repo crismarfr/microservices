@@ -34,7 +34,7 @@
 	var service = {};
 	service.authenticate = function ($scope) {
 		$http({
-			url: 'http://localhost:8080/uaa/oauth/token',
+			url: 'http://localhost:8082/uaa/oauth/token',
 			method: "post",
 			data: $.param({
 			grant_type: 'password',
@@ -68,7 +68,7 @@
 	service.refreshToken = function ($scope) {
 		var refresh_token=localStorageService.get('refreshAuthToken');
 		$http({
-			url: 'http://localhost:8080/uaa/oauth/token',
+			url: 'http://localhost:8082/uaa/oauth/token',
 			method: "post",
 			data: $.param({
 			grant_type: 'refresh_token',
@@ -121,7 +121,7 @@
 	
 	service.callMic = function ($scope) {
 		$http({
-			url: 'http://localhost:8080/api1/callMicroservice',
+			url: 'http://localhost:8082/api1/callMicroservice',
 			method: "get",
 			headers: {
 			'Accept': 'application/json',
@@ -141,7 +141,7 @@
 
 	service.callMic1 = function ($scope) {
 		$http({
-			url: 'http://localhost:8080/api2/callMicroservice',
+			url: 'http://localhost:8082/api2/callMicroservice',
 			method: "get",
 			headers: {
 			'Accept': 'application/json',
@@ -161,7 +161,7 @@
 	
 	service.callMic2 = function ($scope) {
 		$http({
-			url: 'http://localhost:8080/api3/callMicroservice',
+			url: 'http://localhost:8082/api3/callMicroservice',
 			method: "get",
 			headers: {
 			'Accept': 'application/json',
@@ -181,7 +181,7 @@
 	
 	service.callMic3 = function ($scope) {
 		$http({
-			url: 'http://localhost:8080/api4/callMicroservice',
+			url: 'http://localhost:8082/api4/callMicroservice',
 			method: "get",
 			headers: {
 			'Accept': 'application/json',
@@ -201,7 +201,7 @@
 	
 		service.callMic4 = function ($scope) {
 		$http({
-			url: 'http://localhost:8080/api1/callMicroservice2',
+			url: 'http://localhost:8082/api1/callMicroservice2',
 			method: "get",
 			headers: {
 			'Accept': 'application/json',
