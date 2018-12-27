@@ -1,23 +1,40 @@
 #!groovy
 pipeline {
     agent any
-
+	tools {
+		maven 'MAVEN'
+	  }
     stages {
-	
+		stage('Init') {
+            steps {
+                echo 'Init....'
+            }
+        }	
 		stage('Checkout') {
-		checkout(
-			[$class: 'GitSCM',
-			branches: [[name: '*/master']],
-			doGenerateSubmoduleConfigurations: false,
-			extensions: [],
-			submoduleCfg: [],
-			userRemoteConfigs: [[url: 'https://github.com/crismarfr/microservices.git']]
-			])
+			steps {
+				echo 'Checkout..'
+				checkout(
+					[$class: 'GitSCM',
+					branches: [[name: '*/master']],
+					doGenerateSubmoduleConfigurations: false,
+					extensions: [],
+					submoduleCfg: [],
+					userRemoteConfigs: [[url: 'https://github.com/crismarfr/microservices.git']]
+					])
+			
+				sh "cd install/docker-compose; ./stop-docker-compose.sh"
+			}		
 		}
-	
-        stage('Build') {
+        stage('Build maven') {
             steps {
                 echo 'Building..'
+				 sh "cd install/docker; ./maven.sh"
+            }
+        }
+		stage('Build docker image') {
+            steps {
+                echo 'Building..'
+				sh "cd install/docker-compose; ./build-docker-compose.sh"
             }
         }
         stage('Test') {
@@ -33,6 +50,7 @@ pipeline {
 		stage('Run') {
             steps {
                 echo 'Running....'
+				sh "cd install/docker-compose; ./start-docker-compose.sh"
             }
         }
     }
