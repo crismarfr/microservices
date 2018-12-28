@@ -71,6 +71,7 @@ services:
             - '8082:8080'
         networks:
             - my_net
+            - docker-compose_main 
         depends_on:
             configserver:
                 condition: service_healthy
@@ -203,3 +204,7 @@ services:
 networks:
     my_net:
         driver: bridge
+        name: my_net
+    docker-compose_main:
+        driver: bridge
+        name: docker-compose_main
