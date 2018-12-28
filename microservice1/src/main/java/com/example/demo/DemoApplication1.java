@@ -95,6 +95,15 @@ public class DemoApplication1 {
 		return mess;
 	}
 	 
+	@RequestMapping(value="/callMicroserviceTest", method=RequestMethod.GET)
+	 private Message appelMicroserviceTest() {
+		
+		Message mess=new Message();
+		mess.setMess("Status microservice1 Test OK !");			
+//		log.info(mess.getMess());
+		return mess;
+	}
+	
 	@Autowired
 	private ResourceServerProperties sso;
 

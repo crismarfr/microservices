@@ -24,10 +24,6 @@ zuul:
       path: /api4/**
       service-id: microservice4
       sensitive-headers:
-    microservice5:
-      path: /api5/**
-      service-id: microservice5
-      sensitive-headers:
     auth-server: 
       path: /uaa/**
       service-id: auth-server
