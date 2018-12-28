@@ -194,8 +194,11 @@ services:
         image: 'mic5:latest'
         expose:
             - 8094
+        ports:
+            - '8094:8094'
         networks:
             - my_net
+            - docker-compose_main 
         depends_on:
             configserver:
                 condition: service_healthy
