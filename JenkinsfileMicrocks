@@ -1,0 +1,16 @@
+#!groovy
+pipeline {
+    agent any
+	tools {
+		maven 'MAVEN'
+	  }
+    stages {
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+step([$class: 'io.github.microcks.jenkins.plugin.MicrocksTester', runnerType: 'POSTMAN', server: 'microcks', serviceId: 'http://localhost:8080/rest/Test/1.0/callMicroservice', testEndpoint: 'http://mic5:8094', verbose: 'true', waitUnit: 'sec'])
+            }
+        }
+
+    }
+}
