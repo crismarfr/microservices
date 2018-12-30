@@ -8,19 +8,6 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-
-	timeout(time: 5, unit: 'MINUTES') {
-		waitUntil {
-		step(
-			try {         
-				new URL("http://mic5:8094").getText()
-				return true
-			} catch (Exception e) {
-				return false
-			})
-		}
-	}
-
 step([$class: 'io.github.microcks.jenkins.plugin.MicrocksTester', runnerType: 'POSTMAN', server: 'microcks', serviceId: 'Test:1.0', testEndpoint: 'http://mic5:8094', verbose: 'true', waitUnit: 'sec'])
             }
         }
