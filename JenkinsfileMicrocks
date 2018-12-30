@@ -11,12 +11,13 @@ pipeline {
 
 	timeout(time: 5, unit: 'MINUTES') {
 		waitUntil {
+		step(
 			try {         
 				new URL("http://mic5:8094").getText()
 				return true
 			} catch (Exception e) {
 				return false
-			}
+			})
 		}
 	}
 
