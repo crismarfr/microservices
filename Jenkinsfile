@@ -37,17 +37,12 @@ pipeline {
 				sh "cd install/docker-compose; ./build-docker-compose.sh"
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
             }
         }
-		stage('Run') {
+	stage('Run') {
             steps {
                 echo 'Running....'
 				sh "cd install/docker-compose; ./start-docker-compose.sh"
