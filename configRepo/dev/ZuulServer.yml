@@ -3,7 +3,7 @@ spring:
     name: ZuulServer
 
 server:
-  port: 8080
+  port: 8082
 
 zuul:
   trace-request-body: true
