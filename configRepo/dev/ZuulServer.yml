@@ -42,6 +42,5 @@ eureka:
       hostname: registry2
       port: 8762
 
-
 logging:
   file: D:/Mes documents/tmp/logs/${spring.application.name}.log
