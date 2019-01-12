@@ -11,7 +11,7 @@ security:
         client-id: acme
         client-secret: secret
         scope: microservice1, microservice2, microservice3, microservice4, microservice6
-        authorized-grant-types: password,refresh_token
+        authorized-grant-types: password,refresh_token,authorization_code
 
 eureka:
   instance:

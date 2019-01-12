@@ -20,9 +20,7 @@ security:
         client-id: acme
         client-secret: secret
         access-token-uri: http://${gateway.hostname}:${gateway.port}/uaa/oauth/token
-        user-authorization-uri: http://${gateway.hostname}:${gateway.port}/uaa/oauth/authorize
-        scope: 
-        authorized-grant-types: password,refresh_token        
+        user-authorization-uri: http://${gateway.hostname}:${gateway.port}/uaa/oauth/authorize      
       resource:
         user-info-uri: http://${gateway.hostname}:${gateway.port}/uaa/user 
 
