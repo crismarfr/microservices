@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: ZuulProxyServer
+
+server:
+  port: 8083
+
+
+zuul:
+ trace-request-body: true
+ routes:
+   zuulserver:
+     path: /ZuulServer/**
+     url: http://localhost:8082
+     sensitive-headers:      
+
+security:
+    oauth2:
+      client:
+        client-id: acme
+        client-secret: secret
+        access-token-uri: http://${gateway.hostname}:${gateway.port}/uaa/oauth/token
+        user-authorization-uri: http://${gateway.hostname}:${gateway.port}/uaa/oauth/authorize
+        scope: 
+        authorized-grant-types: password,refresh_token        
+      resource:
+        user-info-uri: http://${gateway.hostname}:${gateway.port}/uaa/user 
+
+gateway:
+  hostname: gateway
+  port: 8082
+
+logging:
+  file: D:/Mes documents/tmp/logs/${spring.application.name}.log
