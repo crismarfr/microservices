@@ -10,7 +10,7 @@ zuul:
  routes:
    zuulserver:
      path: /ZuulServer/**
-     url: http://${gateway.hostname}:${gateway.port}
+     url: http://gateway:8082
      sensitive-headers:      
 
 gateway:
