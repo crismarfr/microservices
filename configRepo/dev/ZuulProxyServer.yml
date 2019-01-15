@@ -1,14 +1,13 @@
 spring:
   application:
     name: ZuulProxyServer
-security:
+  security:
     user:
       name: root
       password: password
       
 server:
   port: 8083
-
 
 zuul:
  trace-request-body: true
@@ -26,4 +25,4 @@ security:
         grant_type: password
 
 logging:
-  file: D:/Mes documents/tmp/logs/${spring.application.name}.log
+  file: D:/Mes documents/tmp/logs/${spring.application.name}.log 
