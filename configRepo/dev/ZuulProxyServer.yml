@@ -13,6 +13,10 @@ zuul:
      url: http://{gateway.hostname}:{gateway.port}
      sensitive-headers:      
 
+gateway:
+  hostname: gateway
+  port: 8082
+
 security:
     oauth2:
       client:
