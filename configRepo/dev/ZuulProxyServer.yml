@@ -11,22 +11,25 @@ zuul:
  routes:
    zuulserver:
      path: /ZuulServer/**
-     url: http://localhost:8082
+     url: http://{gateway.hostname}:{gateway.port}
      sensitive-headers:      
+
+gateway:
+  hostname: gateway
+  port: 8082
 
 security:
     oauth2:
       client:
         client-id: acme
         client-secret: secret
-        access-token-uri: http://${gateway.hostname}:${gateway.port}/uaa/oauth/token
-        user-authorization-uri: http://${gateway.hostname}:${gateway.port}/uaa/oauth/authorize      
-      resource:
-        user-info-uri: http://${gateway.hostname}:${gateway.port}/uaa/user 
+        grant_type: password
 
-gateway:
-  hostname: gateway
-  port: 8082
+spring:
+  security:
+    user:
+      name: root
+      password: password
 
 logging:
   file: D:/Mes documents/tmp/logs/${spring.application.name}.log
