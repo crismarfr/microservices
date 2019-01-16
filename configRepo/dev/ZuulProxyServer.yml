@@ -9,7 +9,7 @@ zuul:
  trace-request-body: true
  routes:
    zuulserver:
-     path: /ZuulServer/**
+     path: /**
      url: http://gateway:8082
      sensitive-headers:      
 
