@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.bean.Message;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 
 @SpringBootApplication
 @RestController
+@EnableSwagger2
 public class DemoApplication5{
 
 	@RequestMapping(value="/callMicroservice", method=RequestMethod.GET)

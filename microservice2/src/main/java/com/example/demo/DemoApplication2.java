@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.bean.Message;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 @SpringBootApplication
 @EnableHystrix
 @EnableEurekaClient
@@ -28,6 +30,7 @@ import com.example.demo.bean.Message;
 @EnableResourceServer
 @EnableOAuth2Client
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableSwagger2
 public class DemoApplication2{
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	

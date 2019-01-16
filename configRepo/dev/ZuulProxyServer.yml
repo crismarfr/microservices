@@ -1,7 +1,11 @@
 spring:
   application:
     name: ZuulProxyServer
-      
+  security:
+    user:
+      name: root
+      password: password
+            
 server:
   port: 8083
 

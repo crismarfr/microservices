@@ -1,6 +1,6 @@
 spring:
   application:
-    name: microservice3
+    name: ZuulProxyServer
   cloud:
     config:
       uri: http://configserver:8888
@@ -10,12 +10,20 @@ spring:
       password: password
   main:
     allow-bean-definition-overriding: true
-        
+    
 server:
-  port: 8092 
-  
+  port: 8083 
+
+gateway:
+  hostname: gateway
+  port: 8082
+
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+   
+zuul:
+  trace-request-body: true
+ 

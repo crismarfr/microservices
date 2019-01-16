@@ -8,6 +8,8 @@ spring:
     user:
       name: root
       password: password
+  main:
+    allow-bean-definition-overriding: true
       
 server:
   port: 8090 

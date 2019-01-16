@@ -27,6 +27,8 @@ import com.example.demo.bean.Message;
 import com.example.feign.OAuth2FeignAutoConfiguration;
 //import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 @SpringBootApplication
 @ImportAutoConfiguration(OAuth2FeignAutoConfiguration.class)
 @EnableFeignClients
@@ -36,6 +38,7 @@ import com.example.feign.OAuth2FeignAutoConfiguration;
 @EnableResourceServer
 @EnableOAuth2Client
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableSwagger2
 public class DemoApplication1 {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -94,15 +97,6 @@ public class DemoApplication1 {
 //		log.info(mess.getMess());
 		return mess;
 	}
-	 
-	@RequestMapping(value="/callMicroserviceTest", method=RequestMethod.GET)
-	 private Message appelMicroserviceTest() {
-		
-		Message mess=new Message();
-		mess.setMess("Status microservice1 Test OK !");			
-//		log.info(mess.getMess());
-		return mess;
-	}
 	
 	@Autowired
 	private ResourceServerProperties sso;
@@ -115,8 +109,6 @@ public class DemoApplication1 {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context=SpringApplication.run(DemoApplication1.class, args);	
 		appelClient=context.getBean(AppelClient.class);
-		
-		SpringApplication.run(DemoApplication1.class, args);
 	}
 
 }
