@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: ZuulProxyServer
+  security:
+    user:
+      name: root
+      password: password
+            
+server:
+  port: 8083
+
+zuul:
+ trace-request-body: true
+ routes:
+   zuulserver:
+     path: /**
+     url: http://gateway:8082
+     sensitive-headers:      
+
+gateway:
+  hostname: gateway
+  port: 8082
+
+security:
+    oauth2:
+      client:
+        client-id: acme
+        client-secret: secret
+        grant_type: password
+
+logging:
+  file: D:/Mes documents/tmp/logs/${spring.application.name}.log 
