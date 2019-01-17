@@ -14,6 +14,8 @@ cd ../configServer
 mvn clean package -DskipTests
 cd ../gateway 
 mvn clean package -DskipTests
+cd ../gatewayProxy 
+mvn clean package -DskipTests
 cd ../microservice2 
 mvn clean package -DskipTests
 cd ../microservice4
