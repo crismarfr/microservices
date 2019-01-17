@@ -14,12 +14,12 @@ zuul:
  routes:
    zuulserver:
      path: /**
-     url: http://gateway:8082
+     url: http://gateway:8080
      sensitive-headers:      
 
 gateway:
   hostname: gateway
-  port: 8082
+  port: 8080
 
 security:
     oauth2:
@@ -29,4 +29,4 @@ security:
         grant_type: password
 
 logging:
-  file: D:/Mes documents/tmp/logs/${spring.application.name}.log 
+  file: /home/arom/apps/logs/${spring.application.name}.log
