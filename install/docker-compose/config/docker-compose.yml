@@ -77,6 +77,24 @@ services:
                 condition: service_healthy
         logging:
             driver: json-file
+    gatewayproxy:
+        container_name: gatewayproxy
+        build:
+            context: ../../../gatewayProxy
+            dockerfile: Dockerfile_gatewayProxy
+        image: 'gatewayproxy:latest'
+        expose:
+            - 8083
+        ports:
+            - '8083:8080'
+        networks:
+            - my_net
+            - docker-compose_main
+        depends_on:
+            configserver:
+                condition: service_healthy
+        logging:
+            driver: json-file
     security:
         container_name: security
         build:
