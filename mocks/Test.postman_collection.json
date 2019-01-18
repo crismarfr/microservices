@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "d379b5b6-180e-e162-81b3-64aef969c14c",
+		"name": "Test",
+		"description": "version=1.0 - API description",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "12832b3a-9158-4fd2-b1c6-46e46e7c0a16",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "http://localhost:8083/api1/callMicroservice"
+			},
+			"response": [
+				{
+					"name": "api1 - OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:8083/api1/callMicroservice"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 17 Jan 2019 11:31:15 GMT"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "JSESSIONID=B44062F66C59C5F7B0E7984FA2153898; Path=/; HttpOnly"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"mess\": \"Status OK microservice1 !\"\n}"
+				}
+			]
+		}
+	]
+}
