@@ -10,7 +10,7 @@ pipeline {
                 echo 'Testing..'
 step([$class: 'io.github.microcks.jenkins.plugin.MicrocksTester', runnerType: 'POSTMAN', server: 'microcks', serviceId: 'Test:1.0', testEndpoint: 'http://172.19.0.2:8080', verbose: 'true', waitUnit: 'sec'])
 
-step([$class: 'io.github.microcks.jenkins.plugin.MicrocksTester', runnerType: 'POSTMAN', server: 'microcks', serviceId: 'Mic1 REST MockService:1.1', testEndpoint: 'http://172.19.0.2:8080', verbose: 'true', waitUnit: 'sec'])
+step([$class: 'io.github.microcks.jenkins.plugin.MicrocksTester', runnerType: 'SOAP_UI', server: 'microcks', serviceId: 'Mic1 REST MockService:1.1', testEndpoint: 'http://172.19.0.2:8080', verbose: 'true', waitUnit: 'sec'])
 
             }
         }
